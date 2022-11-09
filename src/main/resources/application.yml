@@ -3,5 +3,4 @@ aws:
   secret_access_key: ${AWS_SECRET}
   host:
   s3:
-    bucket: ${S3_BUCKET}
     region: ${S3_REGION}

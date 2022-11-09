@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -24,15 +24,39 @@ public class S3Api implements S3ApiDocs {
 
     @Override
     @GetMapping
-    public List<String> listAllObjectsInBucket() {
-        return s3Service.listAllObjectsInBucket();
+    public List<String> listAllObjectsInBucket(@RequestParam("bucketName") String bucketName) {
+        return s3Service.listAllObjectsInBucket(bucketName);
     }
 
     @Override
     @GetMapping("download/{name}")
-    public ResponseEntity<Resource> downloadByName(@PathVariable String name) throws Exception {
+    public ResponseEntity<Resource> downloadByName(@PathVariable String name, @RequestParam("bucketName") String bucketName) throws Exception {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(s3Service.downloadByName(name));
+                .body(s3Service.downloadByName(name, bucketName));
+    }
+
+    @Override
+    @GetMapping("backup")
+    public byte[] backupFiles(@RequestParam("bucketName") String bucketName) {
+        return s3Service.backupFiles(bucketName);
+    }
+
+    @Override
+    @GetMapping("buckets")
+    public List<String> availableBuckets() {
+        return s3Service.availableBuckets();
+    }
+
+    @Override
+    @PostMapping
+    public String uploadFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam(value = "bucket", required = false, defaultValue = "") String __bucket) {
+        try {
+            return s3Service.uploadFile(multipartFile, __bucket);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
