@@ -50,9 +50,9 @@ public class S3Api implements S3ApiDocs {
 
     @Override
     @PostMapping
-    public String uploadFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam(value = "bucket", required = false, defaultValue = "") String __bucket) {
+    public String uploadFile(@RequestParam("file") MultipartFile multipartFile, @RequestParam(value = "bucket", required = false, defaultValue = "") String bucket) {
         try {
-            return s3Service.uploadFile(multipartFile, __bucket);
+            return s3Service.uploadFile(multipartFile, bucket);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (URISyntaxException e) {
