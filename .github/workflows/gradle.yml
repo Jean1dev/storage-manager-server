@@ -17,24 +17,19 @@ permissions:
   contents: read
 
 jobs:
-  env: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup env
-        uses: jwulf/add-env-vars-action@master
-        with:
-          map: '{"AWS_KEY": "${{ github.run_id }}-${{ github.run_number }}", "AWS_SECRET": "${{ github.run_id }}-${{ github.run_number }}", "S3_REGION": "us-east-1"}'   
-      - name: test1
-        run: echo ${{ env.AWS_KEY }}
-      - name: test2
-        run: echo ${{ env.AWS_SECRET }}
-      
+   
   build:
-    needs: [env]
     
     runs-on: ubuntu-latest
 
     steps:
+    #https://github.com/marketplace/actions/easy-env-vars
+    - uses: briantist/ezenv@v1
+      with:
+        env: |
+          AWS_KEY="AWS_KEY"
+          AWS_SECRET="AWS_SECRET"
+          S3_REGION="us-east-1"
   
     - uses: actions/checkout@v3
     - name: Set up JDK 11
