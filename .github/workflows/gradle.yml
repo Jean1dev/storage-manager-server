@@ -23,7 +23,7 @@ jobs:
       - name: Setup env
         uses: jwulf/add-env-vars-action@master
         with:
-          map: '{"AWS_KEY": "${{ github.run_id }}-${{ github.run_number }}", "AWS_SECRET": "${{ github.run_id }}-${{ github.run_number }}, "S3_REGION": "us-east-1}'   
+          map: '{"AWS_KEY": "${{ github.run_id }}-${{ github.run_number }}", "AWS_SECRET": "${{ github.run_id }}-${{ github.run_number }}, "S3_REGION": "us-east-1"}'   
       - name: test1
         run: echo ${{ env.AWS_KEY }}
       - name: test2
