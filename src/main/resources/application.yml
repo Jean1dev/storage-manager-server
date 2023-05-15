@@ -4,3 +4,6 @@ aws:
   host:
   s3:
     region: us-east-1
+
+server:
+  port: {$PORT:8080}
