@@ -32,9 +32,7 @@ public class LocalApi implements LocalApiDocs {
     public UploadResponseDto performUpload(@RequestParam("file") MultipartFile multipartFile) {
         try {
             return service.performUpload(multipartFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

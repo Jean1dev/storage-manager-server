@@ -3,4 +3,4 @@ aws:
   secret_access_key: ${AWS_SECRET}
   host:
   s3:
-    region: ${S3_REGION}
+    region: us-east-1
