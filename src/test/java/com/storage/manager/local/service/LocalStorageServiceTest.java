@@ -2,10 +2,12 @@ package com.storage.manager.local.service;
 
 import com.storage.manager.ApplicationTest;
 import com.storage.manager.local.api.dto.UploadResponseDto;
+import com.storage.manager.s3.service.S3Service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -22,6 +24,9 @@ public class LocalStorageServiceTest extends ApplicationTest {
 
     @Autowired
     private LocalStorageService service;
+
+    @MockBean
+    private S3Service s3Service;
 
     @Test
     @DisplayName("deve fazer o upload de um arquivo")

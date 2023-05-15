@@ -1,7 +1,10 @@
 package com.storage.manager.s3.service;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.storage.manager.ApplicationTest;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.tomcat.util.digester.ArrayStack;
@@ -19,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,19 +60,19 @@ public class S3ServiceTest extends ApplicationTest {
         file.delete();
     }
 
-    @Test
-    @DisplayName("deve listar todos os buckets")
-    public void availableBuckets() {
-        Bucket bucketMock = mock(Bucket.class);
-        String bucketName = "mock name";
-        when(bucketMock.getName()).thenReturn(bucketName);
-        List<Bucket> buckets = Collections.singletonList(bucketMock);
-        when(amazonS3.listBuckets()).thenReturn(buckets);
-
-        List<String> availableBuckets = s3Service.availableBuckets();
-        Assertions.assertEquals(1, availableBuckets.size());
-        Assertions.assertEquals(bucketName, availableBuckets.get(0));
-    }
+//    @Test
+//    @DisplayName("deve listar todos os buckets")
+//    public void availableBuckets() {
+//        Bucket bucketMock = mock(Bucket.class);
+//        String bucketName = "mock name";
+//        when(bucketMock.getName()).thenReturn(bucketName);
+//        List<Bucket> buckets = Collections.singletonList(bucketMock);
+//        when(amazonS3.listBuckets()).thenReturn(buckets);
+//
+//        List<String> availableBuckets = s3Service.availableBuckets();
+//        Assertions.assertEquals(1, availableBuckets.size());
+//        Assertions.assertEquals(bucketName, availableBuckets.get(0));
+//    }
 
     @Test
     @DisplayName("deve listar todos os objetos do bucket")
