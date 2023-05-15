@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,11 +33,23 @@ public class S3Service {
 
     private static final Logger LOG = LoggerFactory.getLogger(S3Service.class);
 
+    private List<String> bucketsCreated = new ArrayList<>();
+
     @Autowired
     private AmazonS3 s3;
 
+    @PostConstruct
+    public void getBucketsCreated() {
+        LOG.info("recuperando listagem de buckets");
+        bucketsCreated = s3.listBuckets().stream().map(Bucket::getName).collect(Collectors.toList());
+        LOG.info(bucketsCreated.size() + " total de buckets recuperados");
+    }
+
     public String uploadFile(MultipartFile multipartFile, String bucketName) throws IOException, URISyntaxException {
-        s3.createBucket(bucketName);
+        if (!bucketsCreated.contains(bucketName)) {
+            s3.createBucket(bucketName);
+            bucketsCreated.add(bucketName);
+        }
 
         String fileName = UUID.randomUUID() + multipartFile.getName();
         File file = new File(fileName);
@@ -126,6 +140,6 @@ public class S3Service {
     }
 
     public List<String> availableBuckets() {
-        return s3.listBuckets().stream().map(Bucket::getName).collect(Collectors.toList());
+        return bucketsCreated;
     }
 }
