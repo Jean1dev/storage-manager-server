@@ -17,4 +17,17 @@
     <td>x</td>
 	</tr>
 </table>
-	
+
+<h1>Local Storage:</h1>
+<table>
+	<tr>
+		<th>Perform upload image</th>
+        <th>Upload file local</th>
+        <th>Perform upload text</th>
+	</tr>
+	<tr>
+	<td></td>
+	<td>x</td>
+    <td></td>
+	</tr>
+</table>
