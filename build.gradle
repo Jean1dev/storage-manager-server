@@ -25,6 +25,11 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+bootJar {
+	archiveName 'application.jar'
+	destinationDirectory.set(file("${rootProject.buildDir}/libs"))
+}
+
 jar {
 	manifest {
 		attributes(

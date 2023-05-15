@@ -1,10 +1,12 @@
 FROM gradle:7.6.1-jdk17-alpine AS builder
 
 WORKDIR /usr/app/
+ENV AWS_KEY is_not_a_real_key
+ENV AWS_SECRET is_not_a_real_SECRET
 
 COPY . .
 
-RUN gradle bootJar
+RUN gradle build
 
 FROM eclipse-temurin:17.0.6_10-jre-alpine
 
