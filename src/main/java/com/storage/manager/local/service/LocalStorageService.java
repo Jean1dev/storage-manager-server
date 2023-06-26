@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
+import java.util.Objects;
 import java.util.UUID;
 
 import static com.storage.manager.local.FileTypesHandler.isATypeResolvedByApplication;
@@ -36,7 +37,9 @@ public class LocalStorageService {
 
     private String salvarArquivoNoDisco(MultipartFile file) throws IOException, URISyntaxException {
         String separator = FileSystems.getDefault().getSeparator();
-        URI uri = this.getClass().getResource(separator).toURI();
+        URI uri = Objects.requireNonNull(this.getClass().getResource(separator)).toURI();
+        LOG.info("URI " + uri);
+
         String path = Paths.get(uri).toString();
         String filename = UUID.randomUUID().toString();
         Path copyLocation = Paths.get(path + File.separator + filename);
