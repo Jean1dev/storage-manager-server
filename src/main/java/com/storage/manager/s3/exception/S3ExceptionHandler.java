@@ -1,8 +1,6 @@
 package com.storage.manager.s3.exception;
 
-import com.amazonaws.Response;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

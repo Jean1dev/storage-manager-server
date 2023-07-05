@@ -11,7 +11,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +37,6 @@ public class S3Service {
     @Autowired
     private AmazonS3 s3;
 
-    @PostConstruct
     public void getBucketsCreated() {
         LOG.info("recuperando listagem de buckets");
         bucketsCreated = s3.listBuckets().stream().map(Bucket::getName).collect(Collectors.toList());
@@ -140,6 +138,10 @@ public class S3Service {
     }
 
     public List<String> availableBuckets() {
+        if (bucketsCreated.isEmpty()) {
+            getBucketsCreated();
+        }
+
         return bucketsCreated;
     }
 }

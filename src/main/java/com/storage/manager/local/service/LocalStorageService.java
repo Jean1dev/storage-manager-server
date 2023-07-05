@@ -2,7 +2,6 @@ package com.storage.manager.local.service;
 
 import com.storage.manager.local.Huffman;
 import com.storage.manager.local.api.dto.UploadResponseDto;
-import com.storage.manager.s3.service.S3Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class LocalStorageService {
             return new UploadResponseDto(filename, "local-bucket");
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            throw new RuntimeException("Não foi possivel salvar o arquivo no disco");
+            throw new ValidationException("Não foi possivel salvar o arquivo no disco");
         }
     }
 
