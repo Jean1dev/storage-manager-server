@@ -18,7 +18,7 @@ public final class SetupCorsRule {
 
     public static void main(String[] args) {
         String accessKey= "";
-        String secretKey = "/DcVZFtRSHSTOjfdSBj";
+        String secretKey = "";
         String region = "us-east-1";
         String bucket = "";
 

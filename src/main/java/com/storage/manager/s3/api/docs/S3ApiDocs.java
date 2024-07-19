@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Tag(description = "Recurso para manipulação do storage AMAZON S3", name = "S3 API")
+@Tag(description = "Recurso para manipulação do storage AMAZON S3", name = "v1/Amazon S3 API")
 public interface S3ApiDocs {
 
     @Operation(description = "retorna o nome de todos os documentos no bucket")

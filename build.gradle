@@ -1,12 +1,15 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.5'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.storage.manager'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+
+java {
+	sourceCompatibility = '21'
+}
 
 repositories {
 	mavenCentral()
@@ -14,20 +17,17 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.337'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
-
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.757'
+	// https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage
+	implementation("com.google.cloud:google-cloud-storage:2.40.1")
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-bootJar {
-	archiveName 'application.jar'
-	destinationDirectory.set(file("${rootProject.buildDir}/libs"))
 }
 
 jar {
