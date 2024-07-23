@@ -2,12 +2,12 @@ package com.storage.manager.local.service;
 
 import com.storage.manager.local.Huffman;
 import com.storage.manager.local.api.dto.UploadResponseDto;
+import jakarta.validation.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.ValidationException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;

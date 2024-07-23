@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.multipart.MultipartFile;
 
-@Tag(description = "Recurso para manipulação do local storage", name = "Local Storage")
+@Tag(description = "Recurso para manipulação do local storage", name = "v1/Local Storage")
 public interface LocalApiDocs {
     @Operation(description = "Upload de qualquer arquivo")
     @ApiResponses(

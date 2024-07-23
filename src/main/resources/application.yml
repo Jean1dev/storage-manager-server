@@ -5,5 +5,18 @@ aws:
   s3:
     region: us-east-1
 
+google:
+  cloud:
+    credentials: ${GOOGLE_CLOUD_CREDENTIALS:is_not_a_real_key}
+    project-id: ${GOOGLE_CLOUD_PROJECT:is_not_a_real_key}
+    storage:
+      connect-timeout: 250
+      read-timeout: 5000
+      retry-delay: 50
+      retry-max-delay: 50
+      retry-max-attempts: 2
+      retry-multiplier: 1.0
+
+
 server:
   port: ${PORT:8080}
