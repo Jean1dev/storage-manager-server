@@ -3,6 +3,8 @@ FROM gradle:8.5.0-jdk21-alpine AS builder
 WORKDIR /usr/app/
 ENV AWS_KEY is_not_a_real_key
 ENV AWS_SECRET is_not_a_real_SECRET
+ENV GOOGLE_CLOUD_CREDENTIALS is_not_a_real_key
+ENV GOOGLE_CLOUD_PROJECT is_not_a_real_key
 
 COPY . .
 

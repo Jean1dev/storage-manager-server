@@ -1,1 +1,1 @@
-web: java -jar build/libs/application.jar
+web: java -jar build/libs/storage-manager-0.0.1-SNAPSHOT.jar
