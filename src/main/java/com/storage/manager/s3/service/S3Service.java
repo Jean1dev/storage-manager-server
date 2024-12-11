@@ -144,4 +144,8 @@ public class S3Service {
 
         return bucketsCreated;
     }
+
+    public void removeFile(String name, String bucketName) {
+        s3.deleteObject(bucketName, name);
+    }
 }

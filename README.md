@@ -9,10 +9,12 @@
 		<th>backup all files</th>
         <th>Upload file</th>
         <th>list all buckets</th>
+        <th>delete file</th>
 	</tr>
 	<tr>
 	<td>x</td>
 	<td>x</td>
+    <td>x</td>
     <td>x</td>
     <td>x</td>
     <td>x</td>
