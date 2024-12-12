@@ -81,7 +81,6 @@ public class S3Service {
         ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
 
         file.delete();
-
         return resource;
     }
 
@@ -105,6 +104,7 @@ public class S3Service {
                     }
                 });
 
+        LOG.info("arquivos baixados");
         try {
             return zipFiles(backup);
         } catch (IOException e) {
