@@ -62,4 +62,14 @@ public interface S3ApiDocs {
             }
     )
     String uploadFile(MultipartFile multipartFile, String __bucket);
+
+    @Operation(description = "Remove file from bucket")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            description = "file removed"
+                    )
+            }
+    )
+    void removeFile(String name, String bucketName);
 }
