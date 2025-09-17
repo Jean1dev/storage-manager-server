@@ -8,6 +8,7 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.storage.manager.config.properties.GoogleCloudProperties;
 import com.storage.manager.config.properties.GoogleStorageProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.util.Base64;
 import java.util.Objects;
 
 @Configuration
+@ConditionalOnProperty(name = "google.cloud.credentials", havingValue = "is_not_a_real_key", matchIfMissing = false)
 public class GoogleCloudStorageConfiguration {
 
     @Bean
@@ -35,8 +37,13 @@ public class GoogleCloudStorageConfiguration {
 
     @Bean
     public Credentials credentials(final GoogleCloudProperties props) throws IOException {
+        String credentialsStr = props.getCredentials();
+        if (credentialsStr == null || credentialsStr.trim().isEmpty() || credentialsStr.equals("is_not_a_real_key")) {
+            return GoogleCredentials.getApplicationDefault();
+        }
+        
         final var jsonBin = Base64.getDecoder()
-                .decode(Objects.requireNonNull(props.getCredentials()));
+                .decode(credentialsStr);
 
         return GoogleCredentials.fromStream(new ByteArrayInputStream(jsonBin));
     }

@@ -1,0 +1,210 @@
+{
+  "id": null,
+  "title": "S3 Operations Metrics",
+  "tags": ["business", "storage", "s3"],
+  "style": "dark",
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "S3 Upload Requests",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(s3_upload_requests_total[5m])",
+          "refId": "A",
+          "legendFormat": "Uploads/sec"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 2,
+      "title": "S3 Download Requests",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(s3_download_requests_total[5m])",
+          "refId": "A",
+          "legendFormat": "Downloads/sec"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      }
+    },
+    {
+      "id": 3,
+      "title": "S3 List Requests",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(s3_list_requests_total[5m])",
+          "refId": "A",
+          "legendFormat": "Lists/sec"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      }
+    },
+    {
+      "id": 4,
+      "title": "S3 Delete Requests",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(s3_delete_requests_total[5m])",
+          "refId": "A",
+          "legendFormat": "Deletes/sec"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      }
+    },
+    {
+      "id": 5,
+      "title": "S3 Operations Over Time",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(s3_upload_requests_total[5m])",
+          "refId": "A",
+          "legendFormat": "Uploads/sec"
+        },
+        {
+          "expr": "rate(s3_download_requests_total[5m])",
+          "refId": "B",
+          "legendFormat": "Downloads/sec"
+        },
+        {
+          "expr": "rate(s3_list_requests_total[5m])",
+          "refId": "C",
+          "legendFormat": "Lists/sec"
+        },
+        {
+          "expr": "rate(s3_delete_requests_total[5m])",
+          "refId": "D",
+          "legendFormat": "Deletes/sec"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "S3 Operation Duration",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(s3_upload_duration_seconds_bucket[5m]))",
+          "refId": "A",
+          "legendFormat": "Upload 50th percentile"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(s3_upload_duration_seconds_bucket[5m]))",
+          "refId": "B",
+          "legendFormat": "Upload 95th percentile"
+        },
+        {
+          "expr": "histogram_quantile(0.50, rate(s3_download_duration_seconds_bucket[5m]))",
+          "refId": "C",
+          "legendFormat": "Download 50th percentile"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(s3_download_duration_seconds_bucket[5m]))",
+          "refId": "D",
+          "legendFormat": "Download 95th percentile"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Total S3 Operations",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "s3_upload_requests_total + s3_download_requests_total + s3_list_requests_total + s3_delete_requests_total",
+          "refId": "A",
+          "legendFormat": "Total Operations"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      }
+    }
+  ],
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "30s",
+  "schemaVersion": 27,
+  "version": 1
+}

@@ -1,0 +1,47 @@
+groups:
+  - name: storage-manager
+    rules:
+      - alert: HighMemoryUsage
+        expr: jvm_memory_used_bytes{job="storage-manager"} / jvm_memory_max_bytes{job="storage-manager"} > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage in Storage Manager"
+          description: "Memory usage is above 80% for more than 5 minutes"
+
+      - alert: HighCPUUsage
+        expr: system_cpu_usage{job="storage-manager"} > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage in Storage Manager"
+          description: "CPU usage is above 80% for more than 5 minutes"
+
+      - alert: ApplicationDown
+        expr: up{job="storage-manager"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Storage Manager application is down"
+          description: "Storage Manager application has been down for more than 1 minute"
+
+      - alert: HighErrorRate
+        expr: rate(http_server_requests_seconds_count{job="storage-manager",status=~"5.."}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate in Storage Manager"
+          description: "Error rate is above 10% for more than 2 minutes"
+
+      - alert: SlowResponseTime
+        expr: histogram_quantile(0.95, rate(http_server_requests_seconds_bucket{job="storage-manager"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow response time in Storage Manager"
+          description: "95th percentile response time is above 2 seconds for more than 5 minutes"
