@@ -8,7 +8,6 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.storage.manager.config.properties.GoogleCloudProperties;
 import com.storage.manager.config.properties.GoogleStorageProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +16,8 @@ import org.threeten.bp.Duration;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.Objects;
 
 @Configuration
-@ConditionalOnProperty(name = "google.cloud.credentials", havingValue = "is_not_a_real_key", matchIfMissing = false)
 public class GoogleCloudStorageConfiguration {
 
     @Bean
