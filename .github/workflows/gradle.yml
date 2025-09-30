@@ -30,7 +30,6 @@ jobs:
           AWS_KEY="AWS_KEY"
           AWS_SECRET="AWS_SECRET"
           S3_REGION="us-east-1"
-          SENTRY_AUTH_TOKEN= ${{ secrets.SENTRY_AUTH_TOKEN }}
   
     - uses: actions/checkout@v3
     - name: Set up JDK 21
@@ -42,3 +41,5 @@ jobs:
       uses: gradle/gradle-build-action@v3
       with:
         arguments: build
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
