@@ -1,1 +1,1 @@
-web: java -jar build/libs/storage-manager-0.0.1-SNAPSHOT.jar
+web: SENTRY_AUTO_INIT=false java -javaagent:sentry-opentelemetry-agent-8.22.0.jar -jar build/libs/storage-manager-0.0.1-SNAPSHOT.jar

@@ -1,3 +1,7 @@
+sentry:
+  dsn: https://b4c4ea398096d61c141a871f7eac051a@o318666.ingest.us.sentry.io/4510108499050496
+  send-default-pii: true
+
 aws:
   access_key_id: ${AWS_KEY:is_not_a_real_key}
   secret_access_key: ${AWS_SECRET:is_not_a_real_key}

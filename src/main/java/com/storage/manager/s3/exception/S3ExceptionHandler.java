@@ -1,6 +1,7 @@
 package com.storage.manager.s3.exception;
 
 import com.amazonaws.services.s3.model.AmazonS3Exception;
+import io.sentry.Sentry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,6 +20,7 @@ public class S3ExceptionHandler extends ResponseEntityExceptionHandler {
         map.put("error", ex.getMessage());
         map.put("details", ex.getAdditionalDetails());
         map.put("message", ex.getErrorMessage());
+        Sentry.captureException(ex);
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
 }
