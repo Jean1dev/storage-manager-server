@@ -6,6 +6,7 @@ import com.storage.manager.gcstorage.GoogleCloudResourceOuput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,9 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
+@ConditionalOnBean(Storage.class)
 public class GoogleCloudStorageService {
 
     private static final Logger log = LoggerFactory.getLogger(GoogleCloudStorageService.class);
@@ -67,6 +68,6 @@ public class GoogleCloudStorageService {
         return blobs.stream()
                 .map(BlobInfo::getBlobId)
                 .map(BlobId::getName)
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 }

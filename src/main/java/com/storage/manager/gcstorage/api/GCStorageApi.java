@@ -3,6 +3,7 @@ package com.storage.manager.gcstorage.api;
 import com.storage.manager.gcstorage.api.docs.GCStorageApiDocs;
 import com.storage.manager.gcstorage.service.GoogleCloudStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(GCStorageApi.PATH)
+@ConditionalOnBean(GoogleCloudStorageService.class)
 public class GCStorageApi implements GCStorageApiDocs {
 
     public static final String PATH = "v1/cloud-storage";
