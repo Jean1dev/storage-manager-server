@@ -55,7 +55,6 @@ public class S3Service {
         Path copyLocation = Paths.get(file.getAbsolutePath());
         Files.copy(multipartFile.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
         s3.putObject(bucketName, fileName, new File(fileName));
-        s3.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
         LOG.info("upload finalizado");
 
         file.delete();
