@@ -1,4 +1,4 @@
-FROM gradle:8.5.0-jdk21-alpine AS builder
+FROM gradle:9.1.0-jdk25-alpine AS builder
 
 WORKDIR /usr/app/
 ENV AWS_KEY is_not_a_real_key
@@ -10,7 +10,7 @@ COPY . .
 
 RUN gradle build --exclude-task test
 
-FROM eclipse-temurin:21.0.3_9-jdk-alpine
+FROM eclipse-temurin:25-jdk-alpine
 
 COPY --from=builder /usr/app/build/libs/*.jar /opt/app/application.jar
 
